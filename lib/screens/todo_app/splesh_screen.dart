@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'display_todo_data_screen.dart';
+
 class SpleshScreen extends StatefulWidget {
   const SpleshScreen({Key? key}) : super(key: key);
 
@@ -8,7 +10,22 @@ class SpleshScreen extends StatefulWidget {
 }
 
 class _SpleshScreenState extends State<SpleshScreen> {
-  Fature
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+      const Duration(seconds: 1),
+      () {
+        return Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const DisplayTodoDataScreen(),
+            ),
+            (route) => false);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
@@ -18,7 +35,7 @@ class _SpleshScreenState extends State<SpleshScreen> {
           style: TextStyle(
             fontSize: 35,
             fontWeight: FontWeight.bold,
-            color: Color(0xff06598a),
+            color: Color(0xff383c42),
             decorationThickness: 2,
             decoration: TextDecoration.underline,
           ),
