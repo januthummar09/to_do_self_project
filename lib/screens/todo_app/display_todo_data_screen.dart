@@ -3,10 +3,10 @@ import 'package:to_do_self_project/models/todo_app/todo_model_data.dart';
 import 'package:to_do_self_project/screens/todo_app/add_todo_screen.dart';
 import 'package:to_do_self_project/screens/todo_app/complete_todo_data_screen.dart';
 import 'package:to_do_self_project/utils/todo_app/constant.dart';
-import 'package:to_do_self_project/utils/todo_app/global.dart';
+import 'package:to_do_self_project/utils/use_both_project/global.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../../utils/todo_app/text_decoration_fun.dart';
+import '../../utils/use_both_project/text_decoration_fun.dart';
 
 class DisplayTodoDataScreen extends StatefulWidget {
   const DisplayTodoDataScreen({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_self_project/utils/todo_app/constant.dart';
 
-import '../../utils/todo_app/global.dart';
-import '../../utils/todo_app/text_decoration_fun.dart';
+import '../../utils/use_both_project/global.dart';
+import '../../utils/use_both_project/text_decoration_fun.dart';
 
 class CompleteTodoDataScreen extends StatefulWidget {
   const CompleteTodoDataScreen({Key? key}) : super(key: key);

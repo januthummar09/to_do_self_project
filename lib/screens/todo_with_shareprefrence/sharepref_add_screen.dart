@@ -1,45 +1,63 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:to_do_self_project/utils/use_both_project/global.dart';
-import 'package:to_do_self_project/utils/use_both_project/text_decoration_fun.dart';
 
 import '../../common_widget/use_both_project/to_do_textfile.dart';
-import '../../models/todo_app/todo_model_data.dart';
+import '../../models/todo_with_shareprefrence/student_model.dart';
+import '../../utils/todo_with_prefrenceshare/local_data.dart';
+import '../../utils/use_both_project/text_decoration_fun.dart';
 
-class AddTodoScreen extends StatefulWidget {
-  final TodoModelData? item;
-  const AddTodoScreen({Key? key, this.item}) : super(key: key);
+class ShareprefAddScreen extends StatefulWidget {
+  const ShareprefAddScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddTodoScreen> createState() => _AddTodoScreenState();
+  State<ShareprefAddScreen> createState() => _ShareprefAddScreenState();
 }
 
-class _AddTodoScreenState extends State<AddTodoScreen> {
-  TextEditingController? titleController;
-  TextEditingController? dateController;
-  TextEditingController? timeController;
-  TextEditingController? subTitleController;
-
+class _ShareprefAddScreenState extends State<ShareprefAddScreen> {
   TextDeco textDeco = TextDeco();
+//  MODEL
+
+  StdModel stdModel = StdModel();
+
+  //SET AND GET FUNCTION OF SHAREPREFRENCE IN LOCAL CLASS
+  LocalData localData = LocalData();
+
+  TextEditingController? nameController;
+  TextEditingController? surnameController;
+  TextEditingController? dobController;
+  TextEditingController? qualificationController;
 
   @override
   void initState() {
-    titleController = TextEditingController();
-    dateController = TextEditingController();
-    timeController = TextEditingController();
-    subTitleController = TextEditingController();
-    editData();
+    // ignore: todo
+    // TODO: implement initState
+    nameController = TextEditingController();
+    surnameController = TextEditingController();
+    dobController = TextEditingController();
+    qualificationController = TextEditingController();
+    // getDataModel();
+    getData();
     super.initState();
   }
 
-  /// Edit data function
+  // getDataModel() async {
+  //   dynamic data = await localData.getModel(localData.todoData);
+  //   stdModel = StdModel.fromJson(data);
+  //   debugPrint("get model dataaaaa-------------->>$data");
+  //   setState(() {});
+  // }
 
-  editData() {
-    if (widget.item != null) {
-      titleController!.text = widget.item!.title!;
-      subTitleController!.text = widget.item!.subTitle!;
-      dateController!.text = widget.item!.date!;
-      timeController!.text = widget.item!.time!;
+  getData() async {
+    if (await localData.containData(localData.todoData)) {
+      dynamic data = await localData.getModel(localData.todoData);
+      debugPrint("data ---------->> $data");
+      stdModel = StdModel.fromJson(data);
+    } else {
+      stdModel.studentList = [];
     }
+    setState(() {});
   }
 
   @override
@@ -52,7 +70,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Todo Detaile Screen",
+          "Todo With sharepref Detaile Screen",
         ),
         backgroundColor: Global.bgColour,
         foregroundColor: Global.fgColour,
@@ -67,7 +85,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Title",
+                "Name",
                 style: textDeco.textDecoration(),
               ),
             ),
@@ -75,8 +93,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               height: heigth / 90,
             ),
             ToDoTextfile(
-              hintText: "Enter Title",
-              controller: titleController,
+              hintText: "Enter Name",
+              controller: nameController,
             ),
             SizedBox(
               height: heigth / 40,
@@ -84,7 +102,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "SubTitle",
+                "Surname",
                 style: textDeco.textDecoration(),
               ),
             ),
@@ -92,8 +110,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               height: heigth / 90,
             ),
             ToDoTextfile(
-              hintText: "Enter SubTitle",
-              controller: subTitleController,
+              hintText: "Enter Surname",
+              controller: surnameController,
             ),
             SizedBox(
               height: heigth / 40,
@@ -101,7 +119,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Date",
+                "DOB",
                 style: textDeco.textDecoration(),
               ),
             ),
@@ -109,16 +127,16 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               height: heigth / 90,
             ),
             ToDoTextfile(
-              hintText: "Enter Date Picker",
-              controller: dateController,
+              hintText: "Enter Date Of Birth",
+              controller: dobController,
               onTap: () async {
                 DateTime? pickerData = await showDatePicker(
                     context: context,
                     initialDate: DateTime.now(),
-                    firstDate: DateTime(2015),
-                    lastDate: DateTime(2030));
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now());
                 debugPrint("date ----------->> $pickerData");
-                dateController!.text = pickerData.toString().split(" ").first;
+                dobController!.text = pickerData.toString().split(" ").first;
                 setState(() {});
               },
             ),
@@ -128,7 +146,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Time",
+                "Qualification",
                 style: textDeco.textDecoration(),
               ),
             ),
@@ -136,30 +154,30 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               height: heigth / 90,
             ),
             ToDoTextfile(
-              hintText: "Enter Time",
-              controller: timeController,
-              onTap: () async {
-                TimeOfDay? pickTime = await showTimePicker(
-                    context: context, initialTime: TimeOfDay.now());
-                if (pickTime != null) {
-                  debugPrint("Time ---------->> ${pickTime.format(context)}");
-                  timeController!.text = pickTime.format(context);
-                }
-                setState(() {});
-              },
+              hintText: "Enter Qualification",
+              controller: qualificationController,
+              maxLines: 8,
             ),
             SizedBox(
               height: heigth / 40,
             ),
             ElevatedButton(
               onPressed: () {
-                TodoModelData todoModelData = TodoModelData(
-                  title: titleController!.text,
-                  date: dateController!.text,
-                  time: timeController!.text,
-                  subTitle: subTitleController!.text,
+                StudentList studentList = StudentList(
+                  name: nameController!.text,
+                  surname: surnameController!.text,
+                  dob: dobController!.text,
+                  qualification: qualificationController!.text,
                 );
-                Navigator.pop(context, todoModelData);
+                stdModel.studentList!.add(studentList);
+                localData.removeData(localData.todoData);
+
+                localData.setModel(
+                  localData.todoData,
+                  jsonEncode(stdModel),
+                );
+
+                Navigator.pop(context);
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
