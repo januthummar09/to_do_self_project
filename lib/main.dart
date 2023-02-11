@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_self_project/screens/todo_app/splesh_screen.dart';
-import 'package:to_do_self_project/screens/todo_with_shareprefrence/sharepre_display_screen.dart';
 import 'package:to_do_self_project/screens/todo_with_shareprefrence/sharepref_splesh_screen.dart';
 import 'package:to_do_self_project/utils/use_both_project/global.dart';
 
@@ -46,54 +45,55 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SharepreDisplayScreen(),
-      // Scaffold(
-      //   appBar: AppBar(
-      //     backgroundColor: Global.bgColour,
-      //     title: Text(
-      //       'List Of Project',
-      //       style: textDeco.textDecoration(
-      //         size: 22,
-      //         fontWeight: FontWeight.bold,
-      //       ),
-      //     ),
-      //   ),
-      //   body: Padding(
-      //     padding: const EdgeInsets.symmetric(
-      //       vertical: 20,
-      //       horizontal: 15,
-      //     ),
-      //     child: ListView.separated(
-      //       itemCount: items.length,
-      //       separatorBuilder: (context, index) => const SizedBox(
-      //         height: 10,
-      //       ),
-      //       itemBuilder: (BuildContext context, int index) {
-      //         return InkWell(
-      //           child: Card(
-      //             color: Global.tileColor,
-      //             child: Padding(
-      //               padding: const EdgeInsets.symmetric(vertical: 20),
-      //               child: Text(
-      //                 items[index].title,
-      //                 textAlign: TextAlign.center,
-      //               ),
-      //             ),
-      //           ),
-      //           onTap: () {
-      //             Navigator.of(context).push(
-      //               CupertinoPageRoute(
-      //                 builder: ((BuildContext context) {
-      //                   return items[index].child;
-      //                 }),
-      //               ),
-      //             );
-      //           },
-      //         );
-      //       },
-      //     ),
-      //   ),
-      // ),
+      home: 
+      // const SharepreDisplayScreen(),
+      Scaffold(
+        appBar: AppBar(
+          backgroundColor: Global.bgColour,
+          title: Text(
+            'List Of Project',
+            style: textDeco.textDecoration(
+              size: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 20,
+            horizontal: 15,
+          ),
+          child: ListView.separated(
+            itemCount: items.length,
+            separatorBuilder: (context, index) => const SizedBox(
+              height: 10,
+            ),
+            itemBuilder: (BuildContext context, int index) {
+              return InkWell(
+                child: Card(
+                  color: Global.tileColor,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Text(
+                      items[index].title,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                onTap: () {
+                  Navigator.of(context).push(
+                    CupertinoPageRoute(
+                      builder: ((BuildContext context) {
+                        return items[index].child;
+                      }),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ),
     );
     
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_self_project/utils/use_both_project/global.dart';
 
 class ToDoTextfile extends StatelessWidget {
   final TextEditingController? controller;
@@ -32,18 +33,20 @@ class ToDoTextfile extends StatelessWidget {
           hintText: hintText,
           hintStyle: const TextStyle(
             color: Color(0xff383c42),
+            fontSize: 14,
           ),
           border: InputBorder.none,
           filled: true,
           fillColor: const Color(0xffefe6fa),
           contentPadding: const EdgeInsets.symmetric(
-            vertical: 20,
+            vertical: 15,
             horizontal: 20,
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
             borderSide: const BorderSide(
-              color: Color(0xff383c42),
+              // color: Color(0xff383c42),
+              color: Global.bgColour,
             ),
           ),
           disabledBorder: OutlineInputBorder(

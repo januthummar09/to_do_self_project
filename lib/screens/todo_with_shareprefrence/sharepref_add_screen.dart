@@ -68,6 +68,7 @@ class _ShareprefAddScreenState extends State<ShareprefAddScreen> {
     double text = MediaQuery.textScaleFactorOf(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text(
           "Todo With sharepref Detaile Screen",

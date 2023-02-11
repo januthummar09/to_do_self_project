@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_self_project/screens/todo_with_shareprefrence/sharepre_display_screen.dart';
 import 'package:to_do_self_project/utils/use_both_project/global.dart';
 
 import '../../utils/use_both_project/text_decoration_fun.dart';
-import 'sharepref_add_screen.dart';
 
 class ShareprefSpleshScreen extends StatefulWidget {
   const ShareprefSpleshScreen({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _ShareprefSpleshScreenState extends State<ShareprefSpleshScreen> {
         return Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => const ShareprefAddScreen(),
+              builder: (context) => const SharepreDisplayScreen(),
             ),
             (route) => false);
       },

@@ -50,6 +50,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     double text = MediaQuery.textScaleFactorOf(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text(
           "Todo Detaile Screen",
@@ -62,7 +63,10 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
           horizontal: 15,
           vertical: 20,
         ),
-        child: Column(
+        child: ListView(
+          padding: const EdgeInsets.only(
+            bottom: 270,
+          ),
           children: [
             Align(
               alignment: Alignment.centerLeft,
@@ -151,23 +155,28 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             SizedBox(
               height: heigth / 40,
             ),
-            ElevatedButton(
-              onPressed: () {
-                TodoModelData todoModelData = TodoModelData(
-                  title: titleController!.text,
-                  date: dateController!.text,
-                  time: timeController!.text,
-                  subTitle: subTitleController!.text,
-                );
-                Navigator.pop(context, todoModelData);
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                  Global.bgColour,
-                ),
-                foregroundColor: MaterialStateProperty.all(Global.fgColour),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 70,
               ),
-              child: const Text('Submit'),
+              child: ElevatedButton(
+                onPressed: () {
+                  TodoModelData todoModelData = TodoModelData(
+                    title: titleController!.text,
+                    date: dateController!.text,
+                    time: timeController!.text,
+                    subTitle: subTitleController!.text,
+                  );
+                  Navigator.pop(context, todoModelData);
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                    Global.bgColour,
+                  ),
+                  foregroundColor: MaterialStateProperty.all(Global.fgColour),
+                ),
+                child: const Text('Submit'),
+              ),
             ),
           ],
         ),
