@@ -9,7 +9,8 @@ import '../../utils/todo_with_prefrenceshare/local_data.dart';
 import '../../utils/use_both_project/text_decoration_fun.dart';
 
 class ShareprefAddScreen extends StatefulWidget {
-  const ShareprefAddScreen({Key? key}) : super(key: key);
+  final StdModel? studItem;
+  const ShareprefAddScreen({Key? key, this.studItem}) : super(key: key);
 
   @override
   State<ShareprefAddScreen> createState() => _ShareprefAddScreenState();
@@ -24,19 +25,19 @@ class _ShareprefAddScreenState extends State<ShareprefAddScreen> {
   //SET AND GET FUNCTION OF SHAREPREFRENCE IN LOCAL CLASS
   LocalData localData = LocalData();
 
-  TextEditingController? nameController;
-  TextEditingController? surnameController;
-  TextEditingController? dobController;
-  TextEditingController? qualificationController;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController surnameController = TextEditingController();
+  TextEditingController dobController = TextEditingController();
+  TextEditingController qualificationController = TextEditingController();
 
   @override
   void initState() {
     // ignore: todo
     // TODO: implement initState
-    nameController = TextEditingController();
-    surnameController = TextEditingController();
-    dobController = TextEditingController();
-    qualificationController = TextEditingController();
+    // nameController = TextEditingController();
+    // surnameController = TextEditingController();
+    // dobController = TextEditingController();
+    // qualificationController = TextEditingController();
     // getDataModel();
     getData();
     super.initState();
@@ -59,6 +60,15 @@ class _ShareprefAddScreenState extends State<ShareprefAddScreen> {
     }
     setState(() {});
   }
+
+  // @override
+  // void dispose() {
+  //   nameController!.dispose();
+  //   surnameController!.dispose();
+  //   dobController!.dispose();
+  //   qualificationController!.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +147,7 @@ class _ShareprefAddScreenState extends State<ShareprefAddScreen> {
                     firstDate: DateTime(1900),
                     lastDate: DateTime.now());
                 debugPrint("date ----------->> $pickerData");
-                dobController!.text = pickerData.toString().split(" ").first;
+                dobController.text = pickerData.toString().split(" ").first;
                 setState(() {});
               },
             ),
@@ -165,13 +175,13 @@ class _ShareprefAddScreenState extends State<ShareprefAddScreen> {
             ElevatedButton(
               onPressed: () {
                 StudentList studentList = StudentList(
-                  name: nameController!.text,
-                  surname: surnameController!.text,
-                  dob: dobController!.text,
-                  qualification: qualificationController!.text,
+                  name: nameController.text,
+                  surname: surnameController.text,
+                  dob: dobController.text,
+                  qualification: qualificationController.text,
                 );
                 stdModel.studentList!.add(studentList);
-                localData.removeData(localData.todoData);
+                // localData.removeData(localData.todoData);
 
                 localData.setModel(
                   localData.todoData,

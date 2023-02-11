@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:to_do_self_project/screens/todo_with_shareprefrence/sharepref_add_screen.dart';
+import 'package:to_do_self_project/screens/todo_with_shareprefrence/sharepref_complete_screen.dart';
+import 'package:to_do_self_project/utils/todo_with_prefrenceshare/constant_sharepref.dart';
 import 'package:to_do_self_project/utils/use_both_project/global.dart';
 import 'package:to_do_self_project/utils/use_both_project/text_decoration_fun.dart';
 
@@ -26,7 +28,7 @@ class _SharepreDisplayScreenState extends State<SharepreDisplayScreen> {
 
   getTodoData() async {
     dynamic data = await localData.getModel(localData.todoData);
-    debugPrint("display screen data------->>${await data}");
+    debugPrint("display screen data------->>$data");
     listOfData = StdModel.fromJson(data);
     setState(() {});
   }
@@ -35,8 +37,8 @@ class _SharepreDisplayScreenState extends State<SharepreDisplayScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double heigth = size.height;
-    double width = size.width;
-    double text = MediaQuery.textScaleFactorOf(context);
+    // double width = size.width;
+    // double text = MediaQuery.textScaleFactorOf(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -49,7 +51,14 @@ class _SharepreDisplayScreenState extends State<SharepreDisplayScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ShareprefCompleteScreen(),
+                ),
+              );
+            },
             icon: const Icon(Icons.done),
             color: Global.fgColour,
             iconSize: 30,
@@ -71,7 +80,7 @@ class _SharepreDisplayScreenState extends State<SharepreDisplayScreen> {
               ),
               itemCount: listOfData!.studentList!.length,
               itemBuilder: (context, index) {
-                final item = listOfData!.studentList![index];
+                var item = listOfData!.studentList![index];
                 return Slidable(
                   key: UniqueKey(),
                   startActionPane: ActionPane(
@@ -91,15 +100,15 @@ class _SharepreDisplayScreenState extends State<SharepreDisplayScreen> {
                     children: [
                       SlidableAction(
                         onPressed: (context) {
-                          debugPrint(
-                              "\n\n\n\n before removeData Main model data ----------->>${listOfData!.studentList!}");
+                          // debugPrint(
+                          //     "\n\n\n\n before removeData Main model data ----------->>${listOfData!.studentList!}");
                           var removeData =
                               listOfData!.studentList!.removeAt(index);
 
                           debugPrint(
                               "\n\n\n\n remove data ----------->>$removeData");
-                          debugPrint(
-                              "\n\n\n\n after removeData Main model data ----------->>${listOfData!.studentList!}");
+                          // debugPrint(
+                          //     "\n\n\n\n after removeData Main model data ----------->>${listOfData!.studentList!}");
 
                           setState(() {});
                         },
@@ -119,10 +128,22 @@ class _SharepreDisplayScreenState extends State<SharepreDisplayScreen> {
                   ),
                   endActionPane: ActionPane(
                     motion: const ScrollMotion(),
+                    dismissible: DismissiblePane(
+                      onDismissed: () {
+                        completeShareData.studentList!
+                            .add(listOfData!.studentList![index]);
+                        //item=listOfData!.studentList![index];
+                        // listOfData!.studentList!.removeAt(index);
+                        setState(() {});
+                      },
+                    ),
                     children: [
                       SlidableAction(
                         onPressed: (context) {
-                          
+                          completeShareData.studentList!.add(item);
+                          //item=listOfData!.studentList![index];
+                          listOfData!.studentList!.removeAt(index);
+                          setState(() {});
                         },
                         backgroundColor: const Color(0xFF7BC043),
                         foregroundColor: Colors.white,
