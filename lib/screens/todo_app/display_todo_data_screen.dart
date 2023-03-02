@@ -23,7 +23,7 @@ class _DisplayTodoDataScreenState extends State<DisplayTodoDataScreen> {
     Size size = MediaQuery.of(context).size;
     double heigth = size.height;
     double width = size.width;
-    double text = MediaQuery.textScaleFactorOf(context);
+    // double text = MediaQuery.textScaleFactorOf(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Global.bgColour,

@@ -132,7 +132,7 @@ class _SharepreDisplayScreenState extends State<SharepreDisplayScreen> {
                       onDismissed: () {
                         completeShareData.studentList!
                             .add(listOfData!.studentList![index]);
-                        //item=listOfData!.studentList![index];
+                        // item=listOfData!.studentList![index];
                         // listOfData!.studentList!.removeAt(index);
                         setState(() {});
                       },
@@ -141,7 +141,7 @@ class _SharepreDisplayScreenState extends State<SharepreDisplayScreen> {
                       SlidableAction(
                         onPressed: (context) {
                           completeShareData.studentList!.add(item);
-                          //item=listOfData!.studentList![index];
+                          // item=listOfData!.studentList![index];
                           listOfData!.studentList!.removeAt(index);
                           setState(() {});
                         },

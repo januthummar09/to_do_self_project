@@ -31,10 +31,10 @@ class _MyAppState extends State<MyApp> {
       title: 'ONLY TODO APP',
       child: const SpleshScreen(),
     ),
-    ListItem(
-      title: 'TODO WITH SHAREPREFRENCE ',
-      child: const ShareprefSpleshScreen(),
-    ),
+    // ListItem(
+    //   title: 'TODO WITH SHAREPREFRENCE ',
+    //   child: const ShareprefSpleshScreen(),
+    // ),
   ];
   // This widget is the root of your application.
   @override
@@ -45,9 +45,9 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: 
-      // const SharepreDisplayScreen(),
-      Scaffold(
+      home:
+          // const SharepreDisplayScreen(),
+          Scaffold(
         appBar: AppBar(
           backgroundColor: Global.bgColour,
           title: Text(
@@ -95,6 +95,5 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
-    
   }
 }

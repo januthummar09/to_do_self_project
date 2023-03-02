@@ -46,8 +46,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double heigth = size.height;
-    double width = size.width;
-    double text = MediaQuery.textScaleFactorOf(context);
+    // double width = size.width;
+    // double text = MediaQuery.textScaleFactorOf(context);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
