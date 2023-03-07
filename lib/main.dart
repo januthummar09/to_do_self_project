@@ -31,10 +31,10 @@ class _MyAppState extends State<MyApp> {
       title: 'ONLY TODO APP',
       child: const SpleshScreen(),
     ),
-    // ListItem(
-    //   title: 'TODO WITH SHAREPREFRENCE ',
-    //   child: const ShareprefSpleshScreen(),
-    // ),
+    ListItem(
+      title: 'TODO WITH SHAREPREFRENCE ',
+      child: const ShareprefSpleshScreen(),
+    ),
   ];
   // This widget is the root of your application.
   @override
